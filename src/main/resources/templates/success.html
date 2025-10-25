@@ -5,82 +5,151 @@
 
 <head th:replace="~{base::head}"></head>
 
+<style>
+	/* General Styling */
+	body {
+		background-color: #f8fafb;
+		font-family: 'Poppins', sans-serif;
+	}
+
+	.section-title h2 {
+		font-weight: 600;
+		color: #198754; /* Bootstrap Success Green */
+	}
+
+	.card {
+		border-radius: 15px;
+		overflow: hidden;
+		box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+	}
+
+	.card-header {
+		background: linear-gradient(135deg, #198754, #28a745);
+		color: #fff;
+		text-align: center;
+		padding: 1.2rem;
+	}
+
+	.card-header h5 {
+		font-weight: 600;
+		margin: 0;
+		letter-spacing: 0.3px;
+	}
+
+	.card-body {
+		padding: 2rem;
+	}
+
+	.invoice-details {
+		border: 1px solid #eaeaea;
+		border-radius: 10px;
+		padding: 1rem 1.5rem;
+		background-color: #fff;
+	}
+
+	.invoice-details p {
+		margin-bottom: 0.6rem;
+		font-size: 0.95rem;
+		color: #333;
+	}
+
+	.invoice-details strong {
+		color: #555;
+	}
+
+	/* Print Button */
+	.print-btn {
+		border-radius: 50px;
+		padding: 0.6rem 1.5rem;
+		font-weight: 500;
+		border: 2px solid #198754;
+		color: #198754;
+		background: transparent;
+		transition: all 0.3s ease;
+	}
+
+	.print-btn:hover {
+		background-color: #198754;
+		color: #fff;
+	}
+
+	/* Footer */
+	.footer-note {
+		font-size: 0.9rem;
+		color: #6c757d;
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.card-body {
+			padding: 1.2rem;
+		}
+	}
+</style>
+
 <body>
-	<!-- Navbar Start -->
+	<!-- Navbar -->
 	<div th:replace="~{base::navbar}"></div>
-	<!-- Navbar End -->
 
+	<!-- Page Header -->
+	<div th:replace="~{base::header(text='Booking Confirmed')}"></div>
 
-	<!-- Page Header Start -->
-	<div th:replace="~{base::header(text='Success')}"></div>
-	<!-- Page Header End -->
+	<!-- Success Section -->
+	<div class="container-fluid py-5 bg-light">
+		<div class="container">
+			<!-- Title -->
+			<div class="section-title text-center mb-5">
+				<h2>Booking Successful</h2>
+				<p class="lead text-muted">Thank you for your booking! Please review your invoice details below.</p>
+			</div>
 
+			<!-- Invoice Card -->
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="card border-0">
+						<div class="card-header">
+							<h5>Invoice Summary</h5>
+						</div>
+						<div class="card-body">
+							<div class="invoice-details mb-3">
+								<div class="row">
+									<div class="col-md-6">
+										<p><strong>Booking ID:</strong> <span th:text="${booked.id}">BK123456</span></p>
+										<p><strong>Name:</strong> <span th:text="${booked.name}">John Doe</span></p>
+										<p><strong>Email:</strong> <span th:text="${booked.email}">john@example.com</span></p>
+									</div>
+									<div class="col-md-6">
+										<p><strong>Phone:</strong> <span th:text="${booked.phoneNumber}">+1 234 567 890</span></p>
+										<p><strong>Booking Date:</strong> <span th:text="${booked.date}">2025-09-11</span></p>
+										<p><strong>Booking Time:</strong> <span th:text="${booked.time}">10:00 AM</span></p>
+									</div>
+								</div>
+							</div>
 
+							<hr>
 
-<!-- Success Start -->
-<div class="container-fluid py-5 bg-light">
-    <div class="container">
-        <!-- Title -->
-        <div class="section-title text-center mb-5">
-            <h2 class="text-success">Booking Successful</h2>
-            <p class="lead">Thank you for your booking! Please find your invoice details below.</p>
-        </div>
+							<!-- Print Button -->
+							<div class="text-center mt-4">
+								<button class="btn print-btn" onclick="window.print()">
+									<i class="bi bi-printer"></i> Print Invoice
+								</button>
+							</div>
+						</div>
+					</div>
 
-        <!-- Invoice Section -->
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card shadow border-0">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">Invoice</h5>
-                    </div>
-                    <div class="card-body">
-                        <!-- Booking Info -->
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <p class="mb-1"><strong>Booking ID:</strong> <span th:text="${booked.id}">BK123456</span></p>
-                                <p class="mb-1"><strong>Name:</strong> <span th:text="${booked.name}">John Doe</span></p>
-                                <p class="mb-1"><strong>Email:</strong> <span th:text="${booked.email}">john@example.com</span></p>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="mb-1"><strong>Phone:</strong> <span th:text="${booked.phoneNumber}">+1 234 567 890</span></p>
-                                <p class="mb-1"><strong>Booking Date:</strong> <span th:text="${booked.date}">2025-09-11</span></p>
-                                <p class="mb-1"><strong>Booking Time:</strong> <span th:text="${booked.time}">10:00 AM</span></p>
-                            </div>
-                        </div>
+					<!-- Footer Note -->
+					<div class="text-center footer-note mt-4">
+						<p>If you have any questions about your booking, please contact our
+							<a href="#" class="text-decoration-none" style="color:#198754;">support team</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-                        <!-- Optional: Payment or Service Info -->
-                        <!--
-                        <hr>
-                        <p><strong>Service:</strong> <span th:text="${booked.service}">Premium Cleaning</span></p>
-                        <p><strong>Amount Paid:</strong> <span th:text="${booked.amount}">$150.00</span></p>
-                        -->
-
-                        <!-- Print Button -->
-                        <div class="text-center mt-4">
-                            <button class="btn btn-outline-success" onclick="window.print()">
-                                <i class="bi bi-printer"></i> Print Invoice
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Optional Footer -->
-                <div class="text-center text-muted small mt-4">
-                    <p>If you have any questions about your booking, please contact our support team.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Success End -->
-
-	
-
-
-
-	<!-- Footer Start -->
+	<!-- Footer -->
 	<div th:replace="~{base::footer}"></div>
-	<!-- Footer End -->
 
 	<div th:replace="~{base::script}"></div>
 </body>
